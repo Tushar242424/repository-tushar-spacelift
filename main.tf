@@ -31,7 +31,7 @@ variable "ec2_instance_type" {}
 variable "key_name" {}
 variable "ec2_name" {}
 
--
+
 
 provider "aws" {
   region = var.aws_region
