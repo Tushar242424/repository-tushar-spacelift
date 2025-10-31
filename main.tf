@@ -1,6 +1,100 @@
+# -------------------------------
+# Variable Declarations
+# -------------------------------
+
+variable "aws_region" {
+  default = "ap-south-1"
+}
+
+variable "s3_bucket_prefix" {
+  default = "tushar-demo-bucket"
+}
+
+variable "s3_bucket_name" {
+  default = "TusharBucket"
+}
+
+variable "environment" {
+  default = "Dev"
+}
+
+variable "vpc_cidr" {
+  default = "10.0.0.0/16"
+}
+
+variable "vpc_name" {
+  default = "TusharVPC"
+}
+
+variable "subnet_cidr" {
+  default = "10.0.1.0/24"
+}
+
+variable "availability_zone" {
+  default = "ap-south-1a"
+}
+
+variable "subnet_name" {
+  default = "TusharSubnet"
+}
+
+variable "igw_name" {
+  default = "TusharIGW"
+}
+
+variable "route_table_name" {
+  default = "TusharRouteTable"
+}
+
+variable "sg_name" {
+  default = "tushar-sg"
+}
+
+variable "sg_description" {
+  default = "Allow SSH and HTTP"
+}
+
+variable "allowed_ssh_cidrs" {
+  type    = list(string)
+  default = ["0.0.0.0/0"]
+}
+
+variable "allowed_http_cidrs" {
+  type    = list(string)
+  default = ["0.0.0.0/0"]
+}
+
+variable "sg_tag_name" {
+  default = "TusharSecurityGroup"
+}
+
+variable "ec2_ami" {
+  default = "ami-0dee22c13ea7a9a67"
+}
+
+variable "ec2_instance_type" {
+  default = "t3.micro"
+}
+
+variable "key_name" {
+  default = "terraform-keypair"
+}
+
+variable "ec2_name" {
+  default = "TusharEC2"
+}
+
+# -------------------------------
+# Provider Configuration
+# -------------------------------
+
 provider "aws" {
   region = var.aws_region
 }
+
+# -------------------------------
+# Resources
+# -------------------------------
 
 resource "random_id" "rand" {
   byte_length = 4
@@ -103,36 +197,3 @@ resource "aws_instance" "tushar_ec2" {
     Name = var.ec2_name
   }
 }
-
-variable "aws_region" {
-  default = "ap-south-1"
-}
-
-variable "s3_bucket_prefix" {}
-variable "s3_bucket_name" {}
-variable "environment" {}
-
-variable "vpc_cidr" {}
-variable "vpc_name" {}
-
-variable "subnet_cidr" {}
-variable "availability_zone" {}
-variable "subnet_name" {}
-
-variable "igw_name" {}
-variable "route_table_name" {}
-
-variable "sg_name" {}
-variable "sg_description" {}
-variable "allowed_ssh_cidrs" {
-  type = list(string)
-}
-variable "allowed_http_cidrs" {
-  type = list(string)
-}
-variable "sg_tag_name" {}
-
-variable "ec2_ami" {}
-variable "ec2_instance_type" {}
-variable "key_name" {}
-variable "ec2_name" {}
