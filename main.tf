@@ -1,43 +1,6 @@
-variable "aws_region" {
-  default = "ap-south-1"
-}
-
-variable "s3_bucket_prefix" {}
-variable "s3_bucket_name" {}
-variable "environment" {}
-
-variable "vpc_cidr" {}
-variable "vpc_name" {}
-
-variable "subnet_cidr" {}
-variable "availability_zone" {}
-variable "subnet_name" {}
-
-variable "igw_name" {}
-variable "route_table_name" {}
-
-variable "sg_name" {}
-variable "sg_description" {}
-variable "allowed_ssh_cidrs" {
-  type = list(string)
-}
-variable "allowed_http_cidrs" {
-  type = list(string)
-}
-variable "sg_tag_name" {}
-
-variable "ec2_ami" {}
-variable "ec2_instance_type" {}
-variable "key_name" {}
-variable "ec2_name" {}
-
-
-
 provider "aws" {
   region = var.aws_region
 }
-
-
 
 resource "random_id" "rand" {
   byte_length = 4
@@ -81,6 +44,7 @@ resource "aws_internet_gateway" "tushar_igw" {
 
 resource "aws_route_table" "tushar_rt" {
   vpc_id = aws_vpc.tushar_vpc.id
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.tushar_igw.id
@@ -139,3 +103,36 @@ resource "aws_instance" "tushar_ec2" {
     Name = var.ec2_name
   }
 }
+
+variable "aws_region" {
+  default = "ap-south-1"
+}
+
+variable "s3_bucket_prefix" {}
+variable "s3_bucket_name" {}
+variable "environment" {}
+
+variable "vpc_cidr" {}
+variable "vpc_name" {}
+
+variable "subnet_cidr" {}
+variable "availability_zone" {}
+variable "subnet_name" {}
+
+variable "igw_name" {}
+variable "route_table_name" {}
+
+variable "sg_name" {}
+variable "sg_description" {}
+variable "allowed_ssh_cidrs" {
+  type = list(string)
+}
+variable "allowed_http_cidrs" {
+  type = list(string)
+}
+variable "sg_tag_name" {}
+
+variable "ec2_ami" {}
+variable "ec2_instance_type" {}
+variable "key_name" {}
+variable "ec2_name" {}
